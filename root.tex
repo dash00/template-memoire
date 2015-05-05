@@ -1,0 +1,468 @@
+% @Author: Jérémy Coatelen
+% @Date:   2015-05-05 19:28:31
+% @Last Modified by:   dash
+% @Last Modified time: 2015-05-05 20:56:31
+
+% Classe de base de type 'report'
+\documentclass{report}
+
+% Pour que LaTeX comprenne les caractères accentués ;
+% norme iso-8859, cela risque de ne pas marcher avec
+% des fichiers créés sous windows
+\usepackage[T1]{fontenc} 	
+
+% Unicode
+\usepackage[utf8x]{inputenc}	
+
+% Pour adopter les règles de typographie française
+\usepackage[frenchb]{babel} 	
+
+% Fonte plus grasse 
+\usepackage{lmodern}		            
+
+% Mise en page
+\usepackage{geometry}		
+\geometry{a4paper}
+
+% Contrôle du header et du footer
+\usepackage{fancyhdr}		
+\pagestyle{fancy}
+
+% Utilisation de la couleur 
+\usepackage{xcolor} 	
+
+% Utilisation des images	                    
+\usepackage{graphicx} 		
+
+% Utilisation des sommaires dans les sections
+\usepackage{minitoc}		
+\mtcselectlanguage{french} 
+\def\mtctitle{Contenu}
+
+% Insertion d'algorithmes
+\usepackage[chapter]{algorithm} 
+\usepackage{algorithmic}
+
+% Ecriture des codes sources
+\usepackage{listings}		
+
+% Utilisation des hyperliens
+\usepackage[hyperfootnotes=false]{hyperref}	
+
+% Liens corrigés vers les figures etc via la capture
+\usepackage[all]{hypcap}	
+				
+% Utilisation des sous-figures
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Utilisation des annexes
+\usepackage{appendix}		
+
+% Utilisation des rétroréférencements sur les citations
+\usepackage[numbers,sort&compress]{natbib}
+%\usepackage{chapterbib}		% en mode section pour avoir une biblio par chapitre
+
+% Insertion d'un glossaire
+\usepackage{glossaries}		
+
+% Insertion de pdf externes comme nvlls pages
+\usepackage{pdfpages}		
+
+% Numérotation du sommaire
+\setcounter{tocdepth}{4}
+%\usepackage{tocloft}
+%\renewcommand\cftchapfont{\LARGE\bfseries}
+%\renewcommand\cftsecfont{\small}
+%\renewcommand\cftchappagefont{\LARGE\bfseries}
+%\renewcommand\cftsecpagefont{\LARGE}
+
+% Numérotation des paragraphes
+\setcounter{secnumdepth}{5}
+
+% texte justifié
+\usepackage{ragged2e} 	
+
+% Génération de texte pour le template	
+\usepackage{lipsum}
+
+% Todo notes
+\usepackage[textsize=small, colorinlistoftodos]{todonotes}
+
+% Interligne
+\usepackage{setspace}		
+\onehalfspacing
+
+% utilisation de \ifstrequal
+\usepackage{pdftexcmds}		
+
+% fusion des lignes d'un tableau
+\usepackage{multirow}		
+
+% (a), (b), ... dans un enumerate
+\usepackage{enumitem}		
+
+% Ajout des numéros de lignes 
+% http://texblog.org/2012/02/08/adding-line-numbers-to-documents/
+%\usepackage[pagewise, modulo]{lineno}
+
+% nouveaux caractères comme \textupfullarrow
+\usepackage{tipx}		
+
+% notamment pour les block de texte encadrés
+\usepackage{fancybox}		
+    
+% Liste des équations
+\usepackage{tocloft}
+
+% Les bibliothèques LaTeX de l'American
+% Mathematical Society
+\usepackage{amsmath} 		
+\usepackage{amssymb}
+
+% accolades dans les fonctions
+\usepackage{cases}	
+
+% expression mathématiques en gras	
+\usepackage{bm}			
+
+% Crochets entiers naturels
+\usepackage{stmaryrd}	
+
+% Polices maths
+\usepackage{mathrsfs}
+
+% unités internationales
+\usepackage{siunitx}
+
+% Tabular extensibles
+\newcommand{\head}[1]{\textnormal{\textbf{#1}}}
+\definecolor{clr-lightgray}{gray}{0.95}
+\usepackage{tabularx}	
+\newcolumntype{P}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
+
+
+% Définition du dossier des images
+\graphicspath{{./images/}}
+
+% Parametres des hyperliens
+\definecolor{coulLiens}{rgb}{0.05,0.19,0.52}
+\definecolor{coulCitations}{rgb}{0.0,0.0,0.5}
+\hypersetup{
+     backref=true,    %permet d'ajouter des liens dans...
+     pagebackref=true,%...les bibliographies
+     hyperindex=true, %ajoute des liens dans les index.
+     colorlinks=true, %colorise les liens
+     breaklinks=true, %permet le retour à la ligne dans les liens trop longs
+     urlcolor= blue, %couleur des 
+     citecolor=coulCitations,
+     linkcolor= coulLiens, %couleur des liens internes
+     bookmarks=true, %créé des signets pour Acrobat
+     bookmarksopen=true,            %si les signets Acrobat sont créés,
+                                    %les afficher complètement.
+     pdftitle={M\'emoire de th\`ese}, %informations apparaissant dans
+     pdfauthor={COATELEN J\'er\'emy},     %dans les informations du document
+     pdfsubject={}          %sous Acrobat.
+}
+
+% Redéfinition des termes utilisés dans les algorithmes
+\renewcommand{\algorithmicrequire} {\textbf{\textsc{Entrées:}}}
+\renewcommand{\algorithmicensure}  {\textbf{\textsc{Sorties:}}}
+\renewcommand{\algorithmicwhile}   {\textbf{tantque}}
+\renewcommand{\algorithmicdo}      {\textbf{faire}}
+\renewcommand{\algorithmicendwhile}{\textbf{fin tantque}}
+\renewcommand{\algorithmicend}     {\textbf{fin}}
+\renewcommand{\algorithmicif}      {\textbf{si}}
+\renewcommand{\algorithmicendif}   {\textbf{fin si}}
+\renewcommand{\algorithmicelse}    {\textbf{sinon}}
+\renewcommand{\algorithmicthen}    {\textbf{alors}}
+\renewcommand{\algorithmicfor}     {\textbf{pour}}
+\renewcommand{\algorithmicforall}  {\textbf{pour tout}}
+\renewcommand{\algorithmicdo}      {\textbf{faire}}
+\renewcommand{\algorithmicendfor}  {\textbf{fin pour}}
+\renewcommand{\algorithmicloop}    {\textbf{boucler}}
+\renewcommand{\algorithmicendloop} {\textbf{fin boucle}}
+\renewcommand{\algorithmicrepeat}  {\textbf{répéter}}
+\renewcommand{\algorithmicuntil}   {\textbf{jusqu'à}}
+\renewcommand{\algorithmicreturn}  {\textbf{retourner}}
+\floatname{algorithm}{Algorithme}
+\renewcommand{\listalgorithmname}	 {Table des Algorithmes}
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Macros générales
+\newcommand{\ea}{\emph{et al.}}
+\newcommand{\cad}{c'est\tiret à\tiret dire}
+\newcommand{\vav}{vis\tiret à\tiret vis}
+
+% Redéfinition des entêtes et pieds de page
+\renewcommand{\chaptermark}[1]{\markboth{\bsc{\chaptername~\thechapter{} :} #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}}\fancyhead{}
+\fancyfoot{}
+\lhead{\textsl{\rightmark}}
+\chead{}
+\rhead{\textsl{\leftmark}}
+\lfoot{Prénom Nom}
+\cfoot{\textbf{\thepage}~~\hyperref[TOC]{\textupfullarrow TdM\textupfullarrow}}
+\rfoot{Mémoire de thèse}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Ligne horizontale
+\newcommand*{\ligne}[1][1]{\begin{center}\rule[0.4em]{0.5\textwidth}{0.5pt}\par\end{center}}
+
+% Todos personnalisés
+\makeatletter
+\newcommand{\todocol}[1]{%
+  \ifnum\pdf@strcmp{#1}{reference}=0
+    green!40%
+  \else\ifnum\pdf@strcmp{#1}{explain}=0
+    red!40%
+  \else\ifnum\pdf@strcmp{#1}{replace}=0
+    blue!40%
+  \else\ifnum\pdf@strcmp{#1}{figure}=0
+    pink!40%
+  \else
+    unknown%
+  \fi\fi\fi\fi}
+\makeatother
+
+% Parametres des codes sources
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{0,0.5,1}
+\definecolor{colString}{rgb}{0.6,0.1,0.1}
+\lstset{%
+  float=hbp,%
+  basicstyle=\ttfamily\small, %
+  identifierstyle=\color{colIdentifier}, %
+  keywordstyle=\color{colKeys}, %
+  stringstyle=\color{colString}, %
+  commentstyle=\color{colComments}, %
+  columns=flexible, %
+  tabsize=4, %2
+  frame=trBL, %
+  frameround=tttt, %
+  extendedchars=true, %
+  showspaces=false, %
+  showstringspaces=false, %
+  numbers=left, %
+  numberstyle=\tiny, %
+  breaklines=true, %
+  breakautoindent=true, %
+  captionpos=b,%
+  xrightmargin=0cm, %
+  xleftmargin=0cm
+} 
+
+% Commandes maths
+\newtheorem{de}{Définition}[subsection] % les définitions et les théorèmes sont
+\newtheorem{theo}{Théorème}[section]    % numérotés par section
+\newtheorem{prop}[theo]{Proposition}    % Les propositions ont le même compteur
+                                        % que les théorèmes
+
+\newcommand{\ordmult}{\mathop{.}} % \ordmult est l'opérateur de multiplication
+                                  % d'ordinaux
+\newcommand{\expo}[2]{#1^{#2}}
+\renewcommand{\degre}{^{\circ}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+
+% Minitoc customisé
+\newcommand{\myminitoc}
+{
+	\minitoc
+	\vspace{0.5cm}
+}
+
+% * Hack du fichier BST par défaut * 
+% Lien vers style personnalisé des citations
+% et Commande pour la double compatibilité des citations fr/en
+\newcommand{\mybibliostyle}{myunsrtnat-fr}
+\DeclareRobustCommand\authorand{et}
+
+% * Hack pour régler les problèmes césure liées à l'utilisation
+% du caractère '-' seul *
+% nouveau trai d'union pour la correction des césures
+\newcommand\tiret{\nobreak\hskip0pt-\nobreak\hskip0pt\relax}
+
+% Commandes pour natbib
+\newcommand{\citeauthorandyear}[1]{(\citeauthor{#1}, \citeyear{#1})}
+
+
+% Défintion des titres à cacher dans le TOC
+\newcommand{\hiddensubsection}[1]{
+\stepcounter{subsection}
+\subsection*{\arabic{chapter}.\arabic{section}.\arabic{subsection}%
+\hspace{1em}{#1}}
+}
+\newcommand{\hiddensubsubsection}[1]{
+\stepcounter{subsubsection}
+\subsubsection*{\arabic{chapter}.\arabic{section}.\arabic{subsection}%
+.\arabic{subsubsection}\hspace{1em}{#1}}
+}
+\newcommand{\hiddenparagraph}[1]{
+  \stepcounter{paragraph}
+  \paragraph*{#1}
+}
+\newcommand{\hiddensubparagraph}[1]{
+  \stepcounter{subparagraph}
+  \subparagraph*{#1}
+}
+
+
+% * Hack pour utiliser une version courte d'un titre dans l'entête *
+\newcommand{\markedsection}[2]{\section[#2]{#2%
+\sectionmark{#1}}
+\sectionmark{#1}}
+\newcommand{\markedsubsection}[2]{\subsection[#2]{#2%
+\subsectionmark{#1}}
+\subsectionmark{#1}}
+
+% guillemets françaises
+\newcommand{\gui}[1]{\og #1 \fg{}}
+
+% Citer de l'anglais 
+\newcommand{\anglais}[1]{\gui{\textit{#1}}}
+
+% Commande pour ajouter une équation à la table des équations
+\newcommand{\listequationsname}{Table des équations}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]
+{\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}~~~#1}}
+
+% Pour l'écartement des lignes de tableau 
+\newcommand{\stretchthistab}[1]{\renewcommand{\arraystretch}{#1}}
+
+
+
+
+% Définition du glassaire
+\include{glossaire}
+\makeglossaries	
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Initialisation des minitoc
+\dominitoc 
+
+% Parametres des codes sources
+\lstset{language=c++}
+\lstset{commentstyle=\textit}
+\setcounter{secnumdepth}{3}
+
+% Numérotation des pages en chiffres romains pour les 
+% premières pages du mémoire
+\pagenumbering{roman}
+
+% Interligne simple pour ces premières pages
+\singlespacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% La premières page est réservées à la liste des todos
+\thispagestyle{empty}
+\listoftodos
+\null
+\pagebreak
+
+% Insertion de la page de garde
+\include{pagedegarde}
+
+\justifying
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page du résumé
+\input{resume}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page des adresses des collaborateurs 
+\input{adresses}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page des remerciements
+\include{merci}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pages du glossaire
+\clearpage
+\phantomsection
+\addstarredchapter{Glossaire}
+\printglossaries
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Liste des symboles
+\include{symboles}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% PAges du sommaire
+\tableofcontents\label{TOC}
+
+% Mise à jour de l'interligne
+\onehalfspacing
+
+% Numérotation des pages en chiffres standards
+\clearpage
+\pagenumbering{arabic}
+
+%\include{avantpropos}
+
+%\linenumbers
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Insertion de l'introduction
+\input{intro}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Insertion du chapitre suivant
+\input{chap2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Insertion du chapitre suivant
+\input{chap3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Insertion de la conclusion
+\input{conclusion}
+
+% Mise à jour de l'interligne
+\singlespacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pages consacrées aux différentes tables de référencement
+\pagebreak 
+\phantomsection
+\addstarredchapter{Table des figures}
+\listoffigures 
+\pagebreak
+\phantomsection
+\addstarredchapter{Table des tableaux}
+\listoftables
+\pagebreak 
+\phantomsection
+\addstarredchapter{Table des algorithmes}
+\listofalgorithms
+\pagebreak 
+\phantomsection
+\addstarredchapter{Table des équations}
+\listofmyequations
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Insertion des annexes
+\begin{appendix}
+\input{annexes}
+\end{appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pages de bibliographie
+\input{biblio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Nouvelle insertion du résumé
+\input{resume}
+
+
+\end{document}

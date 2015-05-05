@@ -1,0 +1,106 @@
+% @Author: Jérémy Coatelen
+% @Date:   2015-05-05 20:21:23
+% @Last Modified by:   dash
+% @Last Modified time: 2015-05-05 21:13:49
+
+\chapter{Introduction générale}
+\label{chap:introduction}
+
+\myminitoc
+
+
+% ===========================================================================
+% ===========================================================================
+\section{Présentation des options}
+
+% ===========================================================================
+\subsection{Fonctions de texte}
+
+\subsubsection{Insertion de citations}
+
+Utiliser des citations : contractée \citep{small} ou avec les auteurs \citet{big}. 
+La langue par défaut est le français mais si vous désirez inclure de l'anglais et
+toute en bénéficiant toujours de natbib alors utiliser ce hack (remplacement du 
+mot clé 'et' par 'and') : 
+\\
+
+\DeclareRobustCommand\authorand{and}
+This sentence is in english but no worries, natbib will use 'and' : 
+\citet{twoauthors}
+\DeclareRobustCommand\authorand{et}
+
+
+\subsubsection{Insertion d'une figure}
+
+Insertion d'une simple figure (figure~\ref{fig:thelabel}).
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=0.6\linewidth]{missing}
+  \caption{\label{fig:thelabel} One figure.}
+\end{figure} 
+
+
+\subsubsection{Insertion de todo notes}
+
+Une todo note ici\todo{une todo note simple} ou\todo[color=\todocol{explain}]{une 
+autre mais colorée} une todo note inline~: 
+\todo[inline]{une todo note inline}
+
+% ===========================================================================
+\subsection{Fonctions techniques}
+
+Insertion de l'équation~\ref{eqn:anequation}~:
+\begin{equation}
+\label{eqn:anequation}
+x = 5
+\myequations{My equation}
+\end{equation}
+
+
+Insertion de l'algorithme~\ref{algo:analgo}~:
+\begin{algorithm}[H]
+\caption{\label{algo:analgo}Un algorithme.}
+\begin{algorithmic}[1]
+\REQUIRE $n \geq 0 \vee x \neq 0$
+    \ENSURE $y = x^n$
+    \STATE $y \Leftarrow 1$
+    \IF{$n < 0$}
+        \STATE $X \Leftarrow 1 / x$
+        \STATE $N \Leftarrow -n$
+    \ELSE
+        \STATE $X \Leftarrow x$
+        \STATE $N \Leftarrow n$
+    \ENDIF
+    \WHILE{$N \neq 0$}
+        \IF{$N$ is even}
+            \STATE $X \Leftarrow X \times X$
+            \STATE $N \Leftarrow N / 2$
+        \ELSE[$N$ is odd]
+            \STATE $y \Leftarrow y \times X$
+            \STATE $N \Leftarrow N - 1$
+        \ENDIF
+    \ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+% ===========================================================================
+% ===========================================================================
+\section{Une section}
+
+
+% ===========================================================================
+\subsection{Une sous\tiret section}
+
+\subsubsection{Une sous\tiret sous\tiret section}
+
+\hiddenparagraph{Un paragraphe caché dans les TOC.}
+
+
+\lipsum[4-8]
+
+
+
+% ===========================================================================
+\subsection{Une autre sous\tiret section}
+
